@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+
+import sys
+from lib.package_management import PackageManager
+
+# The entry point for the package management system CLI
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: packega_manager <command> [arguments]")
+        sys.exit(1)
+
+    # Retrieving the command from the user's input
+    command = sys.argv[1]
+
+    # Initialize the PackageManager class
+    manager = PackageManager()
+
+    # Handling different commands: install, update, remove, etc.
+    if command == 'install':
+        if len(sys.argv) < 3:
+            print("Usage: package_manager install <package_name>")
+            sys.exit(1)
+        package_name = sys.argv[2]
+        manager.install_package(package_name)
+    
+    elif command == 'show_installation_packages':
+        manager.show_installation_packages()
+    
+    elif command == 'update':
+        if len(sys.argv) < 3:
+            print("Usage: package_manager update <package_name>")
+            sys.exit(1)
+        package_name = sys.argv[2]
+        manager.update_package(package_name)
+    
+    elif command == 'remove':
+        if len(sys.argv) < 3:
+            print("Usage: package_manager remove <package_name>")
+            sys.exit(1)
+        package_name = sys.argv[2]
+        manager.remove_package(package_name)
+    
+    elif command == 'update-repos':
+        manager.update_repositories()
+    
+    else:
+        print(f"Unknown command: {command}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
